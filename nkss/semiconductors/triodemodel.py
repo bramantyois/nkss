@@ -15,13 +15,6 @@ class TriodeModel(NLInstance):
     def __init__(self, mu=106, ex=1.46, kg=1572, kp=464, kvb=179.0, rg=2000, vt=2.5e-3):
         """
         Triode Model for state-space simulation
-        :param mu:
-        :param ex:
-        :param kg:
-        :param kp:
-        :param kvb:
-        :param rg:
-        :param vt:
         """
         self.mu = mu
         self.ex = ex  # equal with KX

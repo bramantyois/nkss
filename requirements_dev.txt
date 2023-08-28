@@ -2,3 +2,5 @@ jupyter
 pylance
 pytest
 matplotlib
+flake8
+black

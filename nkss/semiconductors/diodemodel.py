@@ -8,7 +8,6 @@ class DiodeModel(NLInstance):
         Diode clipper model with high pass filter
         :param iis: Is current
         :param vt: temperature voltage
-        :param clip_val: clip voltage before computing exp/sinh function. prevent overflow
         """
         super().__init__(name)
 
