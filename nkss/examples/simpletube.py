@@ -7,7 +7,6 @@ from ..components import ReactiveComponent
 from ..semiconductors.triodemodel import TB12AX7, TB12AX7Improved
 
 
-
 class SimpleTube(NKSS):
     def __init__(self, sample_rate=44100, name='SimpleTube', use_improved_tube=False):
         super().__init__(num_of_nodes=5, sample_rate=sample_rate, v_supply=300, name=name)

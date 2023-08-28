@@ -1,6 +1,5 @@
-from ..components import NLInstance
-import math
 import numpy as np
+from ..components import NLInstance
 
 
 class TransistorModel(NLInstance):
@@ -24,17 +23,18 @@ class TransistorModel(NLInstance):
         compute transistor current, refers to yeh et al
         :param vn: array of vbe and vce
         :return: array of ib and ic
-        """
-        vn = vn.astype(np.longdouble)
+        """        
+        vbe = vn[0][0]
+        vce = vn[1][0]
         
-        vbe = vn[[0]]
-        vce = vn[[1]]
         vbc = vbe - vce
 
-        ib = self.iis * ((math.exp(vbe/self.vt) - 1)/self.bf - (math.exp(vbc/self.vt)-1)/self.br)
-        ic = self.iis * ((math.exp(vbe/self.vt) - 1) - (math.exp(vbc/self.vt)-1)/self.ar)
+        ib = self.iis * ((np.exp(vbe/self.vt) - 1)/self.bf - (np.exp(vbc/self.vt)-1)/self.br)
+        ic = self.iis * ((np.exp(vbe/self.vt) - 1) - (np.exp(vbc/self.vt)-1)/self.ar)
 
-        return np.array([[ib], [ic]])
+        ret = np.array([[ib], [ic]])
+ 
+        return ret
 
     def compute_ji(self, vn):
         """
@@ -43,19 +43,19 @@ class TransistorModel(NLInstance):
         :param vn: array of vbe and vce
         :return: array of J ib and J ic
         """
-        vn = vn.astype(np.longdouble)
-
-        vbe = vn[[0]]
-        vce = vn[[1]]
+        vbe = vn[0][0]
+        vce = vn[1][0]
         vbc = vbe - vce
 
-        ib_be = self.iis * math.exp(vbe/self.vt)/(self.bf*self.vt)
-        ib_ce = self.iis * math.exp(vbc/self.vt)/(self.br*self.vt)
+        ib_be = self.iis * np.exp(vbe/self.vt)/(self.bf*self.vt)
+        ib_ce = self.iis * np.exp(vbc/self.vt)/(self.br*self.vt)
 
-        ic_be = self.iis * math.exp(vbe/self.vt)/self.vt
-        ic_ce = self.iis * math.exp(vbc/self.vt)/(self.ar*self.vt) # (dic/dvbc) * (dvbc/dvce)
+        ic_be = self.iis * np.exp(vbe/self.vt)/self.vt
+        ic_ce = self.iis * np.exp(vbc/self.vt)/(self.ar*self.vt) # (dic/dvbc) * (dvbc/dvce)
 
-        return np.array([[ib_be, ib_ce], [ic_be, ic_ce]])
+        ret = np.array([[ib_be, ib_ce], [ic_be, ic_ce]])
+        
+        return ret
 
 
 class TR5088(TransistorModel):
