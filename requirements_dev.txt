@@ -4,3 +4,4 @@ pytest
 matplotlib
 flake8
 black
+setuptools
